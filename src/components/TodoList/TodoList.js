@@ -1,14 +1,16 @@
 import React from 'react';
+import TodoListItem from '../TodoListItem/TodoListItem'
 
-const TodoList = ( {data} ) => {
+const TodoList = ( { data } ) => {
 	const elements = data.map( (item) => {
 	return (
 	
-		<li>{item.text}</li>
+		<li key={ item.id }><TodoListItem {...item}/></li>
 	
 		);
 	});
 	return (
+
 	<ul>{ elements }</ul>
 
 	);
