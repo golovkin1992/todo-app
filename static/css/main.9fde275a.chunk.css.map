@@ -1,0 +1,1 @@
+{"version":3,"sources":["TodoListItem.css"],"names":[],"mappings":"AAAA,MACC,UACD,CACA,MACC,4BACD,CAEA,QACC,gBACD","file":"main.9fde275a.chunk.css","sourcesContent":["label {\r\n\twidth: 15px;\r\n}\r\n.done {\r\n\ttext-decoration: line-through;\r\n}\r\n\r\n.remove {\r\n\tmargin-left: 10px;\r\n}"]}
