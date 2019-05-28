@@ -13,7 +13,7 @@ const App = () => {
 	];
 	return (
 		<div>
-		<NewItemTodo/>
+		<NewItemTodo data = { arrayTodo }/>
 		<TodoList data = { arrayTodo }/>
 		</div>
 
