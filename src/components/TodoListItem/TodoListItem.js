@@ -7,7 +7,9 @@ export default class TodoListItem extends React.Component {
 	this.state = { isComplete: this.props.isComplete };
 	};
 	handleLabelClick = () => {
+		const {id, isComplete, onToggle} = this.props;
 		this.setState( {isComplete: !this.state.isComplete} );
+		onToggle(id, isComplete);
 	};  
 	handleOnClick = () => {
 	
