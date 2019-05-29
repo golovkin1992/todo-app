@@ -6,10 +6,11 @@ export default class NewItemTodo extends React.Component {
 	this.state = { props };	
 };
 	handleKeyDown = (e) => {
-		if (e.keyCode === 13) {
+		if (e.keyCode === 13 && e.target.value !== '') {
 			const { arrayTodo, addTodoItem } = this.props;
 			const obj = {id: Date.now(), text: e.target.value, isComplete: false};
 			addTodoItem(obj);
+			e.target.value = '';
 		};
 	};
 

@@ -6,32 +6,50 @@ import TodoList from '../TodoList/TodoList';
 export default class App extends React.Component {
 	constructor () {
 		super();
-		this.state = { 
-		arrayTodo: [
-		{id: 1, text: 'one', isComplete: false},
-		{id: 2, text: 'two', isComplete: true},
-		{id: 3, text: 'three', isComplete: false}
-		],
+	//	let storage = JSON.parse(localStorage.getItem('todo'));
+    //if ( !storage ) {
+     // storage = [];
+	//} 
+		this.state = {arrayTodo: JSON.parse(localStorage.getItem('todo')) || [] , 
+		
+	//	arrayTodo: [
+	//	{id: 1, text: 'one', isComplete: false},
+	//	{id: 2, text: 'two', isComplete: true},
+	//	{id: 3, text: 'three', isComplete: false}
+	//	],
 	};
 	console.log(this.state);
 	};
 
 onToggleElement = (id, isComplete) => {
 	this.setState({
-  		arrayTodo: this.state.arrayTodo.map(el => (el.id === id ?  {...el, isComplete:!isComplete}  : el))});
+  		arrayTodo: this.state.arrayTodo.map(el => (el.id === id ?  {...el, isComplete:!isComplete}  : el))},
+  		() => {
+			const str = JSON.stringify(this.state.arrayTodo);
+			localStorage.setItem('todo',str )}
+		);	
+  	
 };
 addElement = (obj) => {
-	this.setState({ arrayTodo: [...this.state.arrayTodo, obj] });
-		//arrayTodo: this.state.arrayTodo.splice(3, 0, obj)});
-	console.log(this.state);
+	this.setState({ 
+		arrayTodo: [...this.state.arrayTodo, obj] },
+		() => {
+			const str = JSON.stringify(this.state.arrayTodo);
+			localStorage.setItem('todo',str )}
+		);
 };
-	 
+
+removeElement = (id) => {
+console.log(id);
+};
+
+
 
 render() {
 	return (
 		<div>
 		<NewItemTodo {...this.handleKeyDown} addTodoItem={this.addElement}/>
-		<TodoList {...this.state} onToggle={this.onToggleElement} />
+		<TodoList {...this.state} onToggle={this.onToggleElement} onRemove={this.removeElement}/>
 		</div>
 	);
 

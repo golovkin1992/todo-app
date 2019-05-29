@@ -11,11 +11,11 @@ export default class TodoList extends React.Component {
 
 
 	render () {
-	const { arrayTodo, onToggle } = this.props;
+	const { arrayTodo, onToggle, onRemove } = this.props;
 	const elements = arrayTodo.map( (item) => {
 		return (
 	
-		<li key={ item.id }><TodoListItem {...item} onToggle={ onToggle }/></li>
+		<li key={ item.id }><TodoListItem {...item} onToggle={ onToggle } onRemove={ onRemove } /></li>
 	
 		);
 		});
