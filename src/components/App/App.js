@@ -6,17 +6,7 @@ import TodoList from '../TodoList/TodoList';
 export default class App extends React.Component {
 	constructor () {
 		super();
-	//	let storage = JSON.parse(localStorage.getItem('todo'));
-    //if ( !storage ) {
-     // storage = [];
-	//} 
 		this.state = {arrayTodo: JSON.parse(localStorage.getItem('todo')) || [] , 
-		
-	//	arrayTodo: [
-	//	{id: 1, text: 'one', isComplete: false},
-	//	{id: 2, text: 'two', isComplete: true},
-	//	{id: 3, text: 'three', isComplete: false}
-	//	],
 	};
 	console.log(this.state);
 	};
@@ -40,10 +30,17 @@ addElement = (obj) => {
 };
 
 removeElement = (id) => {
-console.log(id);
+	const removeIndex = this.state.arrayTodo.findIndex(el => (el.id === id) );
+	this.setState({
+		arrayTodo: [
+		...this.state.arrayTodo.slice(0, removeIndex),
+		...this.state.arrayTodo.slice(removeIndex + 1)
+		] },
+		() => {
+			const str = JSON.stringify(this.state.arrayTodo);
+			localStorage.setItem('todo',str )}
+		);
 };
-
-
 
 render() {
 	return (
