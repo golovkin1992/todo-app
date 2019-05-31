@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './TodoListItem.css';
 
-export default class TodoListItem extends React.Component {
+export default class TodoListItem extends Component {
 	constructor(props) {
 	super(props);
-	this.state = { isComplete: this.props.isComplete };
+	this.state = { 
+		isComplete: this.props.isComplete,
+		newInput: ``
+	 };
 	};
 	handleLabelClick = () => {
 		const {id, isComplete, onToggle} = this.props;
@@ -16,12 +19,47 @@ export default class TodoListItem extends React.Component {
 		const {id, onRemove} = this.props;
 		onRemove(id);
 	};
+	handleKeyDown = (e) => {
+	this.handleKeyDownNewInput(e)
+	};
+	
+	handleOnBlur = (e) => {
+	this.handleKeyDownNewInput(e);
+	};
+
+	handleKeyDownNewInput = (e) => {
+		const {id, onEdit, onRemove} = this.props;
+		let {text} = this.props;
+		if (!e.keyCode || e.keyCode === 13 ) {
+			if (e.target.value !== ''){
+				text = e.target.value;
+				onEdit(id, text);
+				this.setState({newInput:``});
+			} else {
+				onRemove(id);
+			}
+		} 
+	};
+	handleDblClick = () => {
+		const {text}= this.props;
+		this.setState({ newInput: 
+			<input onBlur= {this.handleOnBlur} onKeyDown= {this.handleKeyDown} defaultValue={text}/>
+		});
+	//	const newInput = <input onChange={(e)=>console.log(e)}/>;
+	//	ReactDOM.render(newInput, document.querySelector('.done')
+//);
+		
+	};
+
 	render () {
+		
 		return (
 			<div>
-			<label className= { this.state.isComplete ? 'done': null } onClick={ this.handleLabelClick } >
+			<input type='checkbox' defaultChecked={this.state.isComplete ? true:false}  onClick={ this.handleLabelClick } />
+			<label className= {'label__item '+ (this.state.isComplete ? ' done': '')} onDoubleClick= { this.handleDblClick}>
 			{ this.props.text }
 			</label>
+			{this.state.newInput}
 			<button className= "remove" onClick={this.handleOnClick}>Delete</button>
 			</div>
 			);

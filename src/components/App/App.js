@@ -1,15 +1,23 @@
-import React from 'react';
+import React, {Component} from 'react';
 import NewItemTodo from '../NewItemTodo/NewItemTodo';
 import TodoList from '../TodoList/TodoList';
 
 
-export default class App extends React.Component {
+export default class App extends Component {
 	constructor () {
-		super();
-		this.state = {arrayTodo: JSON.parse(localStorage.getItem('todo')) || [] , 
+	super();
+	this.state = {
+	arrayTodo: JSON.parse(localStorage.getItem('todo')) || [] ,
+	count: {
+		total: 1
+	}
 	};
 	console.log(this.state);
 	};
+saveToStorage = () =>{
+const str = JSON.stringify(this.state.arrayTodo);
+			localStorage.setItem('todo',str )
+};
 
 onToggleElement = (id, isComplete) => {
 	this.setState({
@@ -42,11 +50,20 @@ removeElement = (id) => {
 		);
 };
 
+editElement = (id, text) => {
+	this.setState({
+  		arrayTodo: this.state.arrayTodo.map(el => (el.id === id ? {...el, text} : el))},
+  		() => {
+			const str = JSON.stringify(this.state.arrayTodo);
+			localStorage.setItem('todo',str )});
+};
+
+
 render() {
 	return (
 		<div>
 		<NewItemTodo {...this.handleKeyDown} addTodoItem={this.addElement}/>
-		<TodoList {...this.state} onToggle={this.onToggleElement} onRemove={this.removeElement}/>
+		<TodoList {...this.state} onToggle={this.onToggleElement} onRemove={this.removeElement} onEdit={this.editElement}/>
 		</div>
 	);
 
