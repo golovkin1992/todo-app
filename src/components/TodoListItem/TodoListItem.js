@@ -6,9 +6,11 @@ export default class TodoListItem extends Component {
 	super(props);
 	this.state = { 
 		isComplete: this.props.isComplete,
-		newInput: ``
+		newInput: ``,
+		hiddenElement: false
 	 };
 	};
+
 	handleLabelClick = () => {
 		const {id, isComplete, onToggle} = this.props;
 		this.setState( {isComplete: !this.state.isComplete} );
@@ -19,6 +21,7 @@ export default class TodoListItem extends Component {
 		const {id, onRemove} = this.props;
 		onRemove(id);
 	};
+
 	handleKeyDown = (e) => {
 	this.handleKeyDownNewInput(e)
 	};
@@ -31,10 +34,11 @@ export default class TodoListItem extends Component {
 		const {id, onEdit, onRemove} = this.props;
 		let {text} = this.props;
 		if (!e.keyCode || e.keyCode === 13 ) {
-			if (e.target.value !== ''){
+			if (e.target.value !== '') {
 				text = e.target.value;
 				onEdit(id, text);
-				this.setState({newInput:``});
+				this.setState({ newInput:`` });
+				this.setState({ hiddenElement: false });
 			} else {
 				onRemove(id);
 			}
@@ -43,12 +47,9 @@ export default class TodoListItem extends Component {
 	handleDblClick = () => {
 		const {text}= this.props;
 		this.setState({ newInput: 
-			<input onBlur= {this.handleOnBlur} onKeyDown= {this.handleKeyDown} defaultValue={text}/>
+			<input autoFocus onBlur= {this.handleOnBlur} onKeyDown= {this.handleKeyDown} defaultValue={text}/>
 		});
-	//	const newInput = <input onChange={(e)=>console.log(e)}/>;
-	//	ReactDOM.render(newInput, document.querySelector('.done')
-//);
-		
+		this.setState({ hiddenElement: true});	
 	};
 
 	render () {
@@ -56,10 +57,10 @@ export default class TodoListItem extends Component {
 		return (
 			<div>
 			<input type='checkbox' defaultChecked={this.state.isComplete ? true:false}  onClick={ this.handleLabelClick } />
-			<label className= {'label__item '+ (this.state.isComplete ? ' done': '')} onDoubleClick= { this.handleDblClick}>
+			<label hidden={ this.state.hiddenElement } className= {'label__item'+ (this.state.isComplete ? ' done': '')} onDoubleClick= { this.handleDblClick}>
 			{ this.props.text }
 			</label>
-			{this.state.newInput}
+			{ this.state.newInput }
 			<button className= "remove" onClick={this.handleOnClick}>Delete</button>
 			</div>
 			);

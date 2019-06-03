@@ -4,20 +4,18 @@ import TodoListItem from '../TodoListItem/TodoListItem'
 export default class TodoList extends Component {
 
 	render () {
-	const { arrayTodo, onToggle, onRemove, onEdit } = this.props;
-	const elements = arrayTodo.map( (item) => {
+	const { items, onToggle, onRemove, onEdit } = this.props;
+	const elements = items.map( (item) => {
 		return (
-	
 		<li key={ item.id }><TodoListItem {...item} onToggle={ onToggle } onRemove={ onRemove } onEdit={ onEdit } /></li>
-	
 		);
-		});
+	});
 
-	return (
+		return (
 
-	<ul>{ elements }</ul>
+			<ul>{ elements }</ul>
 
-	);			
+		);			
 	};
 
 
