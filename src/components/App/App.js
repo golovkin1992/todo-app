@@ -10,41 +10,29 @@ export default class App extends Component {
 	this.state = {
 		arrayTodo: JSON.parse(localStorage.getItem('todo')) || [] ,	
 		filter: localStorage.getItem('filter') || 'all',
-	
 	}
 	
 	console.log(this.state);
 	
 	};
 
-activeItems = () => {
-	const { arrayTodo } = this.state;
-	//const obj = {
-	//	total: arrayTodo.length,
-	const active = arrayTodo.filter( (item) => !item.isComplete).length;
-	this.setState({active: active });
-	return 	active;
-	//	completed: arrayTodo.filter( (item) => item.isComplete).length
-	//	};
-	
-};
+
 	
 
 onChangeFilter = (filterName) => {
 	this.setState({filter: filterName});
 	localStorage.setItem('filter', filterName);
-
 };
 
 setFilter = (filterName) => {
 	const { arrayTodo } = this.state;
 	switch (filterName) {
 		case 'all':
-		return arrayTodo;
+			return arrayTodo;
 		case 'completed':
-		return arrayTodo.filter( (item) => item.isComplete);
+			return arrayTodo.filter( (item) => item.isComplete);
 		case 'active':
-		return arrayTodo.filter( (item) => !item.isComplete);
+			return arrayTodo.filter( (item) => !item.isComplete);
 	};
 	 	
 };
@@ -69,9 +57,7 @@ addElement = (obj) => {
 
 clearCompletedOnClick = () => {
 	this.setState({
-		arrayTodo: 
-		this.state.arrayTodo.map(el => (el.isComplete ? this.removeElement(el.id): el))
-	});
+	arrayTodo: this.state.arrayTodo.filter( (item) => !item.isComplete)});
 };
 
 removeElement = (id) => {
@@ -95,16 +81,35 @@ editElement = (id, text) => {
 			localStorage.setItem('todo',str )});
 };
 
+toggleAll = (e) => {
+	if (e.target.checked) {
+		this.setState({
+		arrayTodo: this.state.arrayTodo.map((el, i) => (  {...el, isComplete: true} ))
+		});
+	} else {
+		this.setState({
+			arrayTodo: this.state.arrayTodo.map((el, i) => (  {...el, isComplete: false} ))	
+		});
+	}
+};
+
 
 render() {
+	const counter = {
+			active: this.state.arrayTodo.filter( (item) => !item.isComplete).length,
+			completed: this.state.arrayTodo.filter( (item) => item.isComplete).length
+	};
+	const { active, completed } = counter;
 	const filterItems = this.setFilter(this.state.filter);
 	return (
 		<div>
+		<input onClick={ this.toggleAll } checked= {active === 0} type='checkbox' id='js-select-all' className='js-select-all'/>
+		<label htmlFor="js-select-all"></label>
 		<NewItemTodo addTodoItem={this.addElement}/>
-		<TodoList items={filterItems} onToggle={this.onToggleElement} onRemove={this.removeElement} onEdit={this.editElement}/>
+		<TodoList items={filterItems} onToggleAll={this.state.toggleAll} onToggle={this.onToggleElement} onRemove={this.removeElement} onEdit={this.editElement}/>
 		<Filters currentFilter={this.state.filter} onChangeFilter= {this.onChangeFilter}/>
 		<span>{this.state.arrayTodo.filter((item)=> !item.isComplete).length}</span>
-		<button onClick= {this.clearCompletedOnClick}>Clear completed</button>
+		<button hidden= {completed <= 0} onClick= {this.clearCompletedOnClick}>Clear completed</button>
 		</div>
 	);
 
