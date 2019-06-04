@@ -1,0 +1,75 @@
+.js-select-all {
+  width: 1px;
+  height: 1px;
+  border: none;
+  opacity: 0;
+  position: absolute;
+  right: 100%;
+  bottom: 100%;
+}
+.js-select-all + label {
+  width: 60px;
+  padding: 0;
+  height: 34px;
+  font-size: 0;
+  position: absolute;
+  top: 9px;
+  left: -5px;
+  transform: rotate(90deg);
+}
+.js-select-all + label:before {
+  content: "❯";
+  font-size: 26px;
+  color: #e6e6e6;
+  padding: 12px 27px 1px 27px;
+}
+
+.js-select-all:checked + label:before {
+  color: #737373;
+}
+.js-clear-completed {
+  background: transparent;
+  position: absolute;
+  right: 0;
+  border: none;
+  font-size: 14px;
+  color: inherit;
+}
+.js-clear-completed:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.js-clear-completed:focus {
+  outline: none;
+}
+.js-footer {
+  color: #777;
+  padding: 10px 15px;
+  height: 20px;
+  text-align: center;
+  border-top: 1px solid #e6e6e6;
+  margin: 0;
+}
+
+.counter {
+  position: absolute;
+  left: 0;
+}
+.counter strong {
+  font-weight: normal;
+}
+
+@media (max-width: 560px) and (min-width: 320px) {
+  .wrap {
+    width: 100vw;
+  }
+}
+@media (max-width: 430px) and (min-width: 320px) {
+  .js-footer {
+    height: 50px;
+  }
+
+  .js-filters {
+    bottom: 10px;
+  }
+}

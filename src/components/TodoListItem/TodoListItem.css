@@ -1,10 +1,68 @@
-label {
-	width: 15px;
+label, .js-edit {
+  width: 100%;
+  font-size: 24px;
+  padding: 15px 15px 15px 60px;
 }
+
+
 .done {
 	text-decoration: line-through;
 }
 
-.remove {
-	margin-left: 10px;
+.destroy {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  background: none;
+  color: #cc9a9a;
+  border: 0;
+  font-size: 30px;
+  margin: auto 0;
+  outline: none;
+  margin-bottom: 11px;
+}
+.destroy:after {
+  display: block;
+  content: "×";
+}
+.destroy:hover {
+  color: #af5b5e;
+}
+
+.content-wrap {
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: white;
+  border-bottom: 1px solid #ededed;
+  position: relative;
+}
+.content-wrap .complete {
+  opacity: 0;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  border: none;
+}
+.content-wrap .complete + label {
+  background-image: url('./not-checked.svg');
+  background-repeat: no-repeat;
+  background-position: center left;
+  word-break: break-all;
+}
+.content-wrap .complete:checked + label {
+  background-image: url('./cheked.svg');
+  background-repeat: no-repeat;
+  background-position: center left;
+  color: #d9d9d9;
+  text-decoration: line-through;
 }
