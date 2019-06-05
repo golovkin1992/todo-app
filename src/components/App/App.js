@@ -12,41 +12,45 @@ export default class App extends Component {
 	};
 
 addElement = (obj) => {
+	const { arrayTodo } = this.state;
 	this.setState({ 
-		arrayTodo: [...this.state.arrayTodo, obj] },
+		arrayTodo: [...arrayTodo, obj] },
 		() => {
-			const str = JSON.stringify(this.state.arrayTodo);
+			const str = JSON.stringify(arrayTodo);
 			localStorage.setItem('todo', str)}
 		);
 };
 
 editElement = (id, text) => {
+	const { arrayTodo } = this.state;
 	this.setState({
-  		arrayTodo: this.state.arrayTodo.map(el => (el.id === id ? {...el, text} : el))},
+  		arrayTodo: arrayTodo.map(el => (el.id === id ? {...el, text} : el))},
   		() => {
-			const str = JSON.stringify(this.state.arrayTodo);
+			const str = JSON.stringify(arrayTodo);
 			localStorage.setItem('todo',str )}
 		 );
 };
 
 removeElement = (id) => {
-	const removeIndex = this.state.arrayTodo.findIndex(el => (el.id === id));
+	const { arrayTodo } = this.state;
+	const removeIndex = arrayTodo.findIndex(el => (el.id === id));
 	this.setState({
 		arrayTodo: [
-		...this.state.arrayTodo.slice(0, removeIndex),
-		...this.state.arrayTodo.slice(removeIndex + 1)
+		...arrayTodo.slice(0, removeIndex),
+		...arrayTodo.slice(removeIndex + 1)
 		]},
 		() => {
-			const str = JSON.stringify(this.state.arrayTodo);
+			const str = JSON.stringify(arrayTodo);
 			localStorage.setItem('todo',str )}
 		);
 };
 
 onToggleElement = (id, isComplete) => {
+	const { arrayTodo } = this.state;
 	this.setState({
-  		arrayTodo: this.state.arrayTodo.map(el => (el.id === id? {...el, isComplete:!isComplete} : el))},
+  		arrayTodo: arrayTodo.map(el => (el.id === id ? {...el, isComplete:!isComplete} : el))},
   		() => {
-			const str = JSON.stringify(this.state.arrayTodo);
+			const str = JSON.stringify(arrayTodo);
 			localStorage.setItem('todo', str)}
 		);	
   	
@@ -71,22 +75,24 @@ getFilter = (filterName) => {
 };
 
 clearCompletedOnClick = () => {
+	const { arrayTodo } = this.state;
 	this.setState({
-		arrayTodo: this.state.arrayTodo.filter( (item) => !item.isComplete)},
+		arrayTodo: arrayTodo.filter( (item) => !item.isComplete)},
 		() => {
-			const str = JSON.stringify(this.state.arrayTodo);
+			const str = JSON.stringify(arrayTodo);
 			localStorage.setItem('todo', str)}
 		);
 };
 
 handleToggleAllClick = (e) => {
+	const { arrayTodo } = this.state;
 	if (e.target.checked) {
 		this.setState({
-		arrayTodo: this.state.arrayTodo.map(el => ({...el, isComplete: true}))
+		arrayTodo: arrayTodo.map(el => ({...el, isComplete: true}))
 		});
 	} else {
 		this.setState({
-			arrayTodo: this.state.arrayTodo.map(el => ({...el, isComplete: false}))	
+			arrayTodo: arrayTodo.map(el => ({...el, isComplete: false}))	
 		});
 	}
 };

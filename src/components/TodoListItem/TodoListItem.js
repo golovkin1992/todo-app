@@ -41,11 +41,11 @@ export default class TodoListItem extends Component {
 	};
 	
 	render () {
-		const { text, isComplete } = this.props;
+		const { text, isComplete, isEdit } = this.props;
 		return (
 			<div className = 'content-wrap'>
 			<input className = 'complete' type = 'checkbox' checked = { isComplete }  onClick = { this.handleInputClick } />
-			{ this.state.isEdit ? (
+			{ isEdit ? (
 				<input className='js-edit' autoFocus onBlur= { this.handleOnBlur } onKeyDown= {this.handleKeyDown} defaultValue= {text}/>
 			) : (
 				<label onDoubleClick= { this.handleLabelDblClick }>

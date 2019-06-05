@@ -1,4 +1,4 @@
-import React, { Component }from 'react';
+import React, { Component } from 'react';
 import './NewItemTodo.css';
 
 export default class NewItemTodo extends Component {
