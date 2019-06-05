@@ -1,4 +1,4 @@
-.js-select-all {
+.select-all {
   width: 1px;
   height: 1px;
   border: none;
@@ -7,7 +7,7 @@
   right: 100%;
   bottom: 100%;
 }
-.js-select-all + label {
+.select-all + .label-select-all {
   width: 60px;
   padding: 0;
   height: 34px;
@@ -17,17 +17,17 @@
   left: -5px;
   transform: rotate(90deg);
 }
-.js-select-all + label:before {
+.select-all + .label-select-all:before {
   content: "❯";
   font-size: 26px;
   color: #e6e6e6;
   padding: 12px 27px 1px 27px;
 }
 
-.js-select-all:checked + label:before {
+.select-all:checked + .label-select-all:before {
   color: #737373;
 }
-.js-clear-completed {
+.clear-completed {
   background: transparent;
   position: absolute;
   right: 0;
@@ -35,14 +35,14 @@
   font-size: 14px;
   color: inherit;
 }
-.js-clear-completed:hover {
+.clear-completed:hover {
   text-decoration: underline;
   cursor: pointer;
 }
-.js-clear-completed:focus {
+.clear-completed:focus {
   outline: none;
 }
-.js-footer {
+footer {
   color: #777;
   padding: 10px 15px;
   height: 20px;
@@ -65,11 +65,11 @@
   }
 }
 @media (max-width: 430px) and (min-width: 320px) {
-  .js-footer {
+  footer {
     height: 50px;
   }
 
-  .js-filters {
+  filters {
     bottom: 10px;
   }
 }

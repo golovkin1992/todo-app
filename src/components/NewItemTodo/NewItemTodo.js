@@ -25,8 +25,8 @@ export default class NewItemTodo extends Component {
 	
 		return (
 			<input className = 'js-header__new-item' 
-				onBlur = { this.handleBlur } 
-				onKeyDown = { this.handleKeyDown } 
+				onBlur = {this.handleBlur} 
+				onKeyDown = {this.handleKeyDown} 
 				placeholder='What needs to be done?'/>
 			);
 	};

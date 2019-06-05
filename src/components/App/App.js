@@ -8,7 +8,7 @@ import './App.css';
 export default class App extends Component {
 	state = {
 		arrayTodo: JSON.parse(localStorage.getItem('todo')) || [],	
-		filter: localStorage.getItem('filter') || 'all',
+		filter: localStorage.getItem('filter') || 'all',	
 	};
 
 addElement = (obj) => {
@@ -91,7 +91,7 @@ handleToggleAllClick = (e) => {
 		arrayTodo: arrayTodo.map(el => ({...el, isComplete: true}))
 		});
 	} else {
-		this.setState({
+		this.setState( {
 			arrayTodo: arrayTodo.map(el => ({...el, isComplete: false}))	
 		});
 	}
@@ -108,25 +108,30 @@ render() {
 	const filterItems = this.getFilter(filter);
 	return (
 		<div>
-			<input onClick = { this.handleToggleAllClick } 
-			   checked = { active === 0 }
-			   type = 'checkbox' 
-			   id = 'js-select-all' 
-			   className='js-select-all'/>
-			<label hidden = { total === 0}  htmlFor="js-select-all"></label>
-			<NewItemTodo addElement = { this.addElement }/>
-			<TodoList items = { filterItems } 
-				onToggleAll = { this.handleToggleAllClick } 
-				onToggle = { this.onToggleElement } 
-				onRemove = { this.removeElement } 
-				onEdit = { this.editElement }/>
-			<footer className='js-footer' hidden = { total === 0}>
-				<span className = 'counter'>{ active } items left</span>
-				<Filters currentFilter = { filter } 
+			<input 
+				onClick= {this.handleToggleAllClick} 
+			   	checked= {active === 0}
+			   	type= 'checkbox' 
+			   	id= 'select-all' 
+			   	className='select-all' />
+			<label 
+				className= 'label-select-all' 
+				hidden= {total === 0}  
+				htmlFor= "select-all">
+			</label>
+			<NewItemTodo addElement = {this.addElement} />
+			<TodoList items = {filterItems} 
+				onToggleAll = {this.handleToggleAllClick} 
+				onToggle = {this.onToggleElement} 
+				onRemove = {this.removeElement} 
+				onEdit = {this.editElement}/>
+			<footer className='footer' hidden = {total === 0}>
+				<span className = 'counter'>{active} items left</span>
+				<Filters currentFilter = {filter} 
 				 	onChangeFilter = {this.onChangeFilter}/>
-				<button className = 'js-clear-completed' 
-					hidden = { completed <= 0 } 
-					onClick = { this.clearCompletedOnClick }>Clear completed
+				<button className = 'clear-completed' 
+					hidden = {completed <= 0} 
+					onClick = {this.clearCompletedOnClick}>Clear completed
 				</button>
 			</footer>
 		</div>
