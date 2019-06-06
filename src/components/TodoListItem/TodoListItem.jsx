@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import "./TodoListItem.css";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import './TodoListItem.css';
+import PropTypes from 'prop-types';
 
 export default class TodoListItem extends Component {
   state = { isEdit: false };
@@ -19,23 +19,23 @@ export default class TodoListItem extends Component {
     this.setState({ isEdit: true });
   };
 
-  handleKeyDown = e => {
+  handleKeyDown = (e) => {
     this.handleNewInputEdit(e);
   };
 
-  handleOnBlur = e => {
+  handleOnBlur = (e) => {
     this.handleNewInputEdit(e);
   };
 
-  handleNewInputEdit = e => {
+  handleNewInputEdit = (e) => {
     const { id, onEdit, onRemove } = this.props;
     let { text } = this.props;
     if (!e.keyCode || e.keyCode === 13) {
-      if (e.target.value !== "") {
+      if (e.target.value !== '') {
         text = e.target.value;
         onEdit(id, text);
         // eslint-disable-next-line react/no-unused-state
-        this.setState({ isEdit: false, newInput: `` });
+        this.setState({ isEdit: false, newInput: '' });
       } else {
         onRemove(id);
       }
@@ -83,5 +83,5 @@ TodoListItem.propTypes = {
   isComplete: PropTypes.bool.isRequired,
   onEdit: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
-  onRemove: PropTypes.func.isRequired
+  onRemove: PropTypes.func.isRequired,
 };

@@ -18,7 +18,7 @@ const TodoList = (props) => {
         onToggle={onToggle}
         onRemove={onRemove}
         onEdit={onEdit}
-        />
+      />
     </li>
   ));
   return <ul className="todo-list">{elements}</ul>;

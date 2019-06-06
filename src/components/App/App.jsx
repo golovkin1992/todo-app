@@ -38,9 +38,7 @@ export default class App extends Component {
   handleToggleElement = (id, isComplete) => {
     const { arrayTodo } = this.state;
     this.setState({
-      arrayTodo: arrayTodo.map(el =>
-        (el.id === id ? { ...el, isComplete: !isComplete } : el),
-      ),
+      arrayTodo: arrayTodo.map(el => (el.id === id ? { ...el, isComplete: !isComplete } : el)),
     });
   };
 
