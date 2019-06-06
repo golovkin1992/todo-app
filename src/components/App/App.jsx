@@ -10,12 +10,17 @@ export default class App extends Component {
     filter: localStorage.getItem('filter') || 'all',
   };
 
+  componentDidUpdate() {
+    this.saveToStorage();
+  }
+
   handleAddElement = (obj) => {
     const { arrayTodo } = this.state;
     this.setState({
       arrayTodo: [...arrayTodo, obj],
     });
   };
+
 
   handleEditElement = (id, text) => {
     const { arrayTodo } = this.state;
@@ -67,7 +72,7 @@ export default class App extends Component {
     }
   };
 
-  handleClearCompletedOnClick = () => {
+  handleClearCompletedClick = () => {
     const { arrayTodo } = this.state;
     this.setState({
       arrayTodo: arrayTodo.filter(item => !item.isComplete),
@@ -90,7 +95,6 @@ export default class App extends Component {
     const active = arrayTodo.filter(item => !item.isComplete).length;
     const completed = arrayTodo.filter(item => item.isComplete).length;
     const filterItems = this.getFilter(filter);
-    this.saveToStorage();
     return (
       <div>
         <input
@@ -123,7 +127,7 @@ export default class App extends Component {
             className="clear-completed"
             type="submit"
             hidden={completed === 0}
-            onClick={this.handleClearCompletedOnClick}
+            onClick={this.handleClearCompletedClick}
           >
             Clear completed
           </button>

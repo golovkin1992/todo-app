@@ -49,6 +49,8 @@
   text-align: center;
   border-top: 1px solid #e6e6e6;
   margin: 0;
+  display: flex;
+  justify-content: center
 }
 
 .counter {
