@@ -18,7 +18,12 @@
 .filter:checked + .all {
   border-color: rgba(175, 47, 47, 0.2);
 }
-
+.filter:checked + .active {
+  border-color: rgba(175, 47, 47, 0.2);
+}
+.filter:checked + .completed {
+  border-color: rgba(175, 47, 47, 0.2);
+}
 .all, .active, .completed {
   background-color: transparent;
   color: inherit;

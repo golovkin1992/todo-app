@@ -86,12 +86,9 @@ export default class App extends Component {
 
   render() {
     const { arrayTodo, filter } = this.state;
-    const counter = {
-      total: arrayTodo.length,
-      active: arrayTodo.filter(item => !item.isComplete).length,
-      completed: arrayTodo.filter(item => item.isComplete).length,
-    };
-    const { total, active, completed } = counter;
+    const total = arrayTodo.length;
+    const active = arrayTodo.filter(item => !item.isComplete).length;
+    const completed = arrayTodo.filter(item => item.isComplete).length;
     const filterItems = this.getFilter(filter);
     this.saveToStorage();
     return (
@@ -118,13 +115,14 @@ export default class App extends Component {
         <footer className="footer" hidden={total === 0}>
           <span className="counter">
             {active}
+            {' '}
             items left
           </span>
           <Filters filter={filter} onChangeFilter={this.handleChangeFilter} />
           <button
             className="clear-completed"
             type="submit"
-            hidden={completed <= 0}
+            hidden={completed === 0}
             onClick={this.handleClearCompletedOnClick}
           >
             Clear completed
