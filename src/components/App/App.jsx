@@ -1,37 +1,37 @@
-import React, { Component } from "react";
-import NewItemTodo from "../NewItemTodo";
-import TodoList from "../TodoList";
-import Filters from "../Filters";
-import "./App.css";
+import React, { Component } from 'react';
+import NewItemTodo from '../NewItemTodo';
+import TodoList from '../TodoList';
+import Filters from '../Filters';
+import './App.css';
 
 export default class App extends Component {
   state = {
-    arrayTodo: JSON.parse(localStorage.getItem("todo")) || [],
-    filter: localStorage.getItem("filter") || "all"
+    arrayTodo: JSON.parse(localStorage.getItem('todo')) || [],
+    filter: localStorage.getItem('filter') || 'all',
   };
 
-  handleAddElement = obj => {
+  handleAddElement = (obj) => {
     const { arrayTodo } = this.state;
     this.setState({
-      arrayTodo: [...arrayTodo, obj]
+      arrayTodo: [...arrayTodo, obj],
     });
   };
 
   handleEditElement = (id, text) => {
     const { arrayTodo } = this.state;
     this.setState({
-      arrayTodo: arrayTodo.map(el => (el.id === id ? { ...el, text } : el))
+      arrayTodo: arrayTodo.map(el => (el.id === id ? { ...el, text } : el)),
     });
   };
 
-  handleRemoveElement = id => {
+  handleRemoveElement = (id) => {
     const { arrayTodo } = this.state;
     const removeIndex = arrayTodo.findIndex(el => el.id === id);
     this.setState({
       arrayTodo: [
         ...arrayTodo.slice(0, removeIndex),
-        ...arrayTodo.slice(removeIndex + 1)
-      ]
+        ...arrayTodo.slice(removeIndex + 1),
+      ],
     });
   };
 
@@ -39,30 +39,30 @@ export default class App extends Component {
     const { arrayTodo } = this.state;
     this.setState({
       arrayTodo: arrayTodo.map(el =>
-        el.id === id ? { ...el, isComplete: !isComplete } : el
-      )
+        (el.id === id ? { ...el, isComplete: !isComplete } : el),
+      ),
     });
   };
 
   saveToStorage = () => {
     const { arrayTodo } = this.state;
     const str = JSON.stringify(arrayTodo);
-    localStorage.setItem("todo", str);
+    localStorage.setItem('todo', str);
   };
 
-  handleChangeFilter = filterName => {
+  handleChangeFilter = (filterName) => {
     this.setState({ filter: filterName });
-    localStorage.setItem("filter", filterName);
+    localStorage.setItem('filter', filterName);
   };
 
-  getFilter = filterName => {
+  getFilter = (filterName) => {
     const { arrayTodo } = this.state;
     switch (filterName) {
-      case "all":
+      case 'all':
         return arrayTodo;
-      case "completed":
+      case 'completed':
         return arrayTodo.filter(item => item.isComplete);
-      case "active":
+      case 'active':
         return arrayTodo.filter(item => !item.isComplete);
       default:
         return arrayTodo;
@@ -72,17 +72,17 @@ export default class App extends Component {
   handleClearCompletedOnClick = () => {
     const { arrayTodo } = this.state;
     this.setState({
-      arrayTodo: arrayTodo.filter(item => !item.isComplete)
+      arrayTodo: arrayTodo.filter(item => !item.isComplete),
     });
   };
 
-  handleToggleAllClick = e => {
+  handleToggleAllClick = (e) => {
     const { arrayTodo } = this.state;
     this.setState({
       arrayTodo: arrayTodo.map(el => ({
         ...el,
-        isComplete: e.target.checked
-      }))
+        isComplete: e.target.checked,
+      })),
     });
   };
 
@@ -91,7 +91,7 @@ export default class App extends Component {
     const counter = {
       total: arrayTodo.length,
       active: arrayTodo.filter(item => !item.isComplete).length,
-      completed: arrayTodo.filter(item => item.isComplete).length
+      completed: arrayTodo.filter(item => item.isComplete).length,
     };
     const { total, active, completed } = counter;
     const filterItems = this.getFilter(filter);
