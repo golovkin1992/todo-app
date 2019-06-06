@@ -1,4 +1,4 @@
-.js-header__new-item {
+.header__new-item {
   width: 100%;
   padding: 16px 16px 16px 60px;
   border: none;
@@ -9,6 +9,6 @@
   font-size: 24px;
   background-color: #fff;
 }
-.js-header__new-item:focus {
+.header__new-item:focus {
   outline: none;
 }

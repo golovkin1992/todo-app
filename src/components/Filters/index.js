@@ -1,1 +1,3 @@
-export default import './Filters';
+import Filters from "./Filters";
+
+export default Filters;

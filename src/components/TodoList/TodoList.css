@@ -1,13 +1,13 @@
 
-li:hover .destroy {
+.item:hover .destroy {
   display: block;
 }
 
-.js-todo-list .js-editing label {
+.todo-list .editing label {
   display: none;
 }
 
-.js-todo-list {
+.todo-list {
   list-style: none;
   margin: 0;
   padding: 0;

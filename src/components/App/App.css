@@ -42,7 +42,7 @@
 .clear-completed:focus {
   outline: none;
 }
-footer {
+.footer {
   color: #777;
   padding: 10px 15px;
   height: 20px;
@@ -55,9 +55,6 @@ footer {
   position: absolute;
   left: 0;
 }
-.counter strong {
-  font-weight: normal;
-}
 
 @media (max-width: 560px) and (min-width: 320px) {
   .wrap {
@@ -65,7 +62,7 @@ footer {
   }
 }
 @media (max-width: 430px) and (min-width: 320px) {
-  footer {
+  .footer {
     height: 50px;
   }
 

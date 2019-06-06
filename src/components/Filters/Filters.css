@@ -6,7 +6,7 @@
   left: 0;
   right: 0;
 }
-.filters li {
+.filters__li {
   display: inline;
 }
 .filter {
