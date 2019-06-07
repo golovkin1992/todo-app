@@ -1,7 +1,8 @@
 import React from 'react';
-import './Filters.css';
 import PropTypes from 'prop-types';
 import FilterItem from '../FilterItem';
+import './Filters.css';
+
 
 const Filters = (props) => {
   const { filter, onChangeFilter } = props;

@@ -116,7 +116,7 @@ export default class App extends Component {
           onRemove={this.handleRemoveElement}
           onEdit={this.handleEditElement}
         />
-        <footer className="footer" hidden={total === 0}>
+        <footer className={`footer ${total === 0 ? ' hidden' : ''}`}>
           <span className="counter">
             {active}
             {' '}
