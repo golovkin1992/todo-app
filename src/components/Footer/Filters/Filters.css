@@ -5,7 +5,7 @@
   position: absolute;
  
 }
-.filters__li {
+.filters__item {
   display: inline;
 }
 .filter {

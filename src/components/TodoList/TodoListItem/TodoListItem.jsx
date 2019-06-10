@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './TodoListItem.css';
 import PropTypes from 'prop-types';
+import './TodoListItem.css';
+
 
 export default class TodoListItem extends Component {
   state = { isEdit: false };
@@ -34,8 +35,7 @@ export default class TodoListItem extends Component {
       if (e.target.value !== '') {
         text = e.target.value;
         onEdit(id, text);
-        // eslint-disable-next-line react/no-unused-state
-        this.setState({ isEdit: false, newInput: '' });
+        this.setState({ isEdit: false });
       } else {
         onRemove(id);
       }
@@ -46,34 +46,36 @@ export default class TodoListItem extends Component {
     const { text, isComplete } = this.props;
     const { isEdit } = this.state;
     return (
-      <div className="content-wrap">
-        <input
-          className="complete"
-          type="checkbox"
-          checked={isComplete}
-          onClick={this.handleInputClick}
-        />
-        {isEdit ? (
+      <li className="item">
+        <div className="content-wrap">
           <input
-            className="edit"
-            // eslint-disable-next-line jsx-a11y/no-autofocus
-            autoFocus
-            onBlur={this.handleOnBlur}
-            onKeyDown={this.handleKeyDown}
-            defaultValue={text}
+            className="complete"
+            type="checkbox"
+            checked={isComplete}
+            onClick={this.handleInputClick}
           />
-        ) : (
+          {isEdit ? (
+            <input
+              className="edit"
+            // eslint-disable-next-line jsx-a11y/no-autofocus
+              autoFocus
+              onBlur={this.handleOnBlur}
+              onKeyDown={this.handleKeyDown}
+              defaultValue={text}
+            />
+          ) : (
           // eslint-disable-next-line jsx-a11y/label-has-associated-control
-          <label className="caption" onDoubleClick={this.handleLabelDblClick}>
-            {text}
-          </label>
-        )}
-        <button
-          className="destroy"
-          type="submit"
-          onClick={this.handleBtnDestroyClick}
-        />
-      </div>
+            <label className="caption" onDoubleClick={this.handleLabelDblClick}>
+              {text}
+            </label>
+          )}
+          <button
+            className="destroy"
+            type="submit"
+            onClick={this.handleBtnDestroyClick}
+          />
+        </div>
+      </li>
     );
   }
 }

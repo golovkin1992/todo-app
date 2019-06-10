@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NewItemTodo from '../NewItemTodo';
 import TodoList from '../TodoList';
-import Filters from '../Filters';
+import Footer from '../Footer';
 import './App.css';
 
 export default class App extends Component {
@@ -42,8 +42,14 @@ export default class App extends Component {
 
   handleToggleElement = (id, isComplete) => {
     const { arrayTodo } = this.state;
+    const changeIndex = arrayTodo.findIndex(el => el.id === id);
+    const updatedObj = Object.assign({}, arrayTodo[changeIndex], { isComplete: !isComplete });
     this.setState({
-      arrayTodo: arrayTodo.map(el => (el.id === id ? { ...el, isComplete: !isComplete } : el)),
+      arrayTodo: [
+        ...arrayTodo.slice(0, changeIndex),
+        updatedObj,
+        ...arrayTodo.slice(changeIndex + 1),
+      ],
     });
   };
 
@@ -116,22 +122,14 @@ export default class App extends Component {
           onRemove={this.handleRemoveElement}
           onEdit={this.handleEditElement}
         />
-        <footer className={`footer ${total === 0 ? ' hidden' : ''}`}>
-          <span className="counter">
-            {active}
-            {' '}
-            items left
-          </span>
-          <Filters filter={filter} onChangeFilter={this.handleChangeFilter} />
-          <button
-            className="clear-completed"
-            type="submit"
-            hidden={completed === 0}
-            onClick={this.handleClearCompletedClick}
-          >
-            Clear completed
-          </button>
-        </footer>
+        <Footer
+          total={total}
+          active={active}
+          completed={completed}
+          selectedFilter={filter}
+          onHandleClearCompletedClick={this.handleClearCompletedClick}
+          onChangeFilter={this.handleChangeFilter}
+        />
       </div>
     );
   }

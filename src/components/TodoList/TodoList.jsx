@@ -1,25 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TodoListItem from '../TodoListItem';
+import TodoListItem from './TodoListItem/index';
 import './TodoList.css';
 
-const TodoList = (props) => {
-  const {
-    items,
-    onToggle,
-    onRemove,
-    onEdit,
-  } = props;
-
+const TodoList = ({
+  items,
+  onToggle,
+  onRemove,
+  onEdit,
+}) => {
   const elements = items.map(item => (
-    <li className="item" key={item.id}>
-      <TodoListItem
-        {...item}
-        onToggle={onToggle}
-        onRemove={onRemove}
-        onEdit={onEdit}
-      />
-    </li>
+    <TodoListItem
+      key={item.id}
+      {...item}
+      onToggle={onToggle}
+      onRemove={onRemove}
+      onEdit={onEdit}
+    />
+
   ));
   return <ul className="todo-list">{elements}</ul>;
 };

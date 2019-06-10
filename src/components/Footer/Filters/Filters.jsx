@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FilterItem from '../FilterItem';
+import FilterItem from './FilterItem';
 import './Filters.css';
 
 
-const Filters = (props) => {
-  const { filter, onChangeFilter } = props;
+const Filters = ({
+  selectedFilter,
+  onChangeFilter,
+}) => {
   const filters = [
     { name: 'all', label: 'All' },
     { name: 'active', label: 'Active' },
@@ -15,10 +17,10 @@ const Filters = (props) => {
   const elements = filters.map(({ name, label }) => (
     <FilterItem
       key={name}
-      currentFilter={filter}
       filterName={name}
       filterLabel={label}
       onChangeFilter={onChangeFilter}
+      isCurrent={selectedFilter === name}
     />
   ));
   return <ul className="filters">{elements}</ul>;
@@ -26,6 +28,6 @@ const Filters = (props) => {
 export default Filters;
 
 Filters.propTypes = {
-  filter: PropTypes.string.isRequired,
+  selectedFilter: PropTypes.string.isRequired,
   onChangeFilter: PropTypes.func.isRequired,
 };
