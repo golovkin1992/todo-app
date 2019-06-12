@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FilterItem from './FilterItem';
+import FilterItem from './FilterItem/index';
 import './Filters.css';
 
 

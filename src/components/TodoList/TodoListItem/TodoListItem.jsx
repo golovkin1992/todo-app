@@ -1,10 +1,20 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './TodoListItem.css';
 
 
-export default class TodoListItem extends Component {
+export default class TodoListItem extends PureComponent {
   state = { isEdit: false };
+
+  inputFocusRef = React.createRef();
+
+  componentDidUpdate() {
+    const { isEdit } = this.state;
+    if (isEdit) {
+      this.inputFocusRef.current.focus();
+    }
+  }
+
 
   handleInputClick = () => {
     const { id, isComplete, onToggle } = this.props;
@@ -15,6 +25,7 @@ export default class TodoListItem extends Component {
     const { id, onRemove } = this.props;
     onRemove(id);
   };
+
 
   handleLabelDblClick = () => {
     this.setState({ isEdit: true });
@@ -49,25 +60,24 @@ export default class TodoListItem extends Component {
       <li className="item">
         <div className="content-wrap">
           <input
+            onClick={this.handleInputClick}
+            onChange={() => {}}
             className="complete"
             type="checkbox"
             checked={isComplete}
-            onClick={this.handleInputClick}
           />
           {isEdit ? (
             <input
               className="edit"
-            // eslint-disable-next-line jsx-a11y/no-autofocus
-              autoFocus
+              ref={this.inputFocusRef}
               onBlur={this.handleOnBlur}
               onKeyDown={this.handleKeyDown}
               defaultValue={text}
             />
           ) : (
-          // eslint-disable-next-line jsx-a11y/label-has-associated-control
-            <label className="caption" onDoubleClick={this.handleLabelDblClick}>
+            <span className="caption" onDoubleClick={this.handleLabelDblClick}>
               {text}
-            </label>
+            </span>
           )}
           <button
             className="destroy"

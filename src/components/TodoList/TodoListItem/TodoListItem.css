@@ -53,13 +53,13 @@
   margin: auto 0;
   border: none;
 }
-.content-wrap .complete + label {
+.content-wrap .complete + .caption {
   background-image: url('./not-checked.svg');
   background-repeat: no-repeat;
   background-position: center left;
   word-break: break-all;
 }
-.content-wrap .complete:checked + label {
+.content-wrap .complete:checked + .caption {
   background-image: url('./cheked.svg');
   background-repeat: no-repeat;
   background-position: center left;

@@ -2,31 +2,29 @@
   width: 1px;
   height: 1px;
   border: none;
-  opacity: 0;
+  display: none;
   position: absolute;
   right: 100%;
   bottom: 100%;
 }
-.select-all + .label-select-all {
-  width: 60px;
-  padding: 0;
-  height: 34px;
-  font-size: 0;
-  position: absolute;
-  top: 9px;
-  left: -5px;
-  transform: rotate(90deg);
-}
-.select-all + .label-select-all:before {
+
+
+.select-all-pseudo:before {
   content: "❯";
   font-size: 26px;
   color: #e6e6e6;
-  padding: 12px 27px 1px 27px;
+  padding: 0 22px;
+  position: absolute;
+  top: 11px;
+  left: -4px;
+  transform: rotate(90deg);
 }
-
-.select-all:checked + .label-select-all:before {
+.select-all:checked + .select-all-pseudo:before {
   color: #737373;
 }
+
+
+
 .clear-completed {
   background: transparent;
   position: absolute;

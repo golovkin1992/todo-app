@@ -12,9 +12,7 @@ const Footer = ({
 }) => (
   <footer className={`footer ${total === 0 ? ' hidden' : ''}`}>
     <span className="counter">
-      {active}
-      {' '}
-            items left
+      {`${active} items left`}
     </span>
     <Filters selectedFilter={selectedFilter} onChangeFilter={onChangeFilter} />
     <button
