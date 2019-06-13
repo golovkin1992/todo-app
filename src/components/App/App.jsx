@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NewItemTodo from '../NewItemTodo';
+import SelectAllTodo from '../SelectAllTodo';
 import TodoList from '../TodoList';
 import Footer from '../Footer';
 import './App.css';
@@ -102,23 +103,12 @@ export default class App extends Component {
     const completed = arrayTodo.filter(item => item.isComplete).length;
     const filterItems = this.getFilter(filter);
     return (
-      <div>
-
-        <label
-          className="label-select-all"
-          hidden={total === 0}
-          htmlFor="select-all"
-        >
-          <input
-            onClick={this.handleToggleAllClick}
-            onChange={() => {}}
-            checked={active === 0}
-            type="checkbox"
-            id="select-all"
-            className="select-all"
-          />
-          <span className="select-all-pseudo" />
-        </label>
+      <>
+        <SelectAllTodo
+          onToggleAllClick={this.handleToggleAllClick}
+          total={total}
+          active={active}
+        />
         <NewItemTodo onAdd={this.handleAddElement} />
         <TodoList
           items={filterItems}
@@ -134,7 +124,7 @@ export default class App extends Component {
           onHandleClearCompletedClick={this.handleClearCompletedClick}
           onChangeFilter={this.handleChangeFilter}
         />
-      </div>
+      </>
     );
   }
 }

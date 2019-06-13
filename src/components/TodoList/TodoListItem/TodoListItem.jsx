@@ -70,7 +70,7 @@ export default class TodoListItem extends PureComponent {
             <input
               className="edit"
               ref={this.inputFocusRef}
-              onBlur={this.handleOnBlur}
+              onBlur={this.handleBlur}
               onKeyDown={this.handleKeyDown}
               defaultValue={text}
             />

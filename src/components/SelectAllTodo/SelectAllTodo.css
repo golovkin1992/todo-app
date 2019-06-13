@@ -1,0 +1,24 @@
+.select-all {
+  width: 1px;
+  height: 1px;
+  border: none;
+  display: none;
+  position: absolute;
+  right: 100%;
+  bottom: 100%;
+}
+
+
+.select-all-pseudo:before {
+  content: "❯";
+  font-size: 26px;
+  color: #e6e6e6;
+  padding: 0 22px;
+  position: absolute;
+  top: 11px;
+  left: -4px;
+  transform: rotate(90deg);
+}
+.select-all:checked + .select-all-pseudo:before {
+  color: #737373;
+}
