@@ -35,7 +35,7 @@ export default class TodoListItem extends PureComponent {
     this.handleNewInputEdit(e);
   };
 
-  handleOnBlur = (e) => {
+  handleBlur = (e) => {
     this.handleNewInputEdit(e);
   };
 
